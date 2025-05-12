@@ -5,4 +5,4 @@ numpy
 geopy
 python-multipart
 pydantic
-sklearn
+scikit-learn
