@@ -58,7 +58,15 @@ def location_data(latitude:float, longitude:float):
     geolocator = Nominatim(user_agent='geo_locator')
     location = geolocator.reverse((latitude, longitude), exactly_one=True)
     # print(location)
-    return location
+    if location is None:
+        return {'error': 'Location not found'}
+
+    return {
+        'address': location.address,
+        'latitude': location.latitude,
+        'longitude': location.longitude,
+        'raw': location.raw  # optional: raw dict info
+    }
 
 
 #print(location)
