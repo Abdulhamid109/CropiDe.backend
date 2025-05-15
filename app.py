@@ -3,6 +3,22 @@ from pydantic import BaseModel
 import joblib
 import numpy as np
 from geopy.geocoders import Nominatim
+from fastapi.middleware.cors import CORSMiddleware
+
+
+app = FastAPI()
+origins = [
+    "http://localhost:5173",  # your Vite/React frontend
+
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,            # you can use ["*"] to allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],              # GET, POST, etc.
+    allow_headers=["*"],              # Content-Type, Authorization, etc.
+)
 
 # Define the Pydantic model for input validation
 class CropDetails(BaseModel):
@@ -15,7 +31,7 @@ class CropDetails(BaseModel):
     rainfall: float
 
 # Initialize FastAPI app
-app = FastAPI()
+
 
 # Load the trained model and label encoder
 model = joblib.load('CropModel.pkl')
