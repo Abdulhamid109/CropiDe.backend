@@ -4,6 +4,7 @@ import joblib
 import numpy as np
 from geopy.geocoders import Nominatim
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 
 app = FastAPI()
@@ -63,7 +64,8 @@ async def predict_crop(details: CropDetails):
     # Decode the predicted label
     predicted_label = encoder.inverse_transform(prediction)[0]
     predicted_label = str(predicted_label)
-    return {'predicted_crop': predicted_label}
+    result= {'predicted_crop': predicted_label}
+    return JSONResponse(content=result)
 
 
 @app.post('/location')
