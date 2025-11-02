@@ -1,7 +1,7 @@
 fastapi
 uvicorn
 joblib
-numpy
+numpy==1.26.4
 geopy
 python-multipart
 pydantic
